@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import {
-  MapPin,
-  Phone,
-  Mail,
-  ArrowRight,
-} from "lucide-react";
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import Image from "next/image";
 
 const quickLinks = [
@@ -71,39 +72,39 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-           <Link href="/" className="inline-flex items-center">
-        <Image
-          src="/logo.png"
-          alt="SB Flight"
-          width={150}
-          height={55}
-          className="h-auto w-[150px] object-contain"
-        />
-      </Link>
+            <Link href="/" className="inline-flex items-center">
+              <Image
+                src="/logo.png"
+                alt="SB Flight"
+                width={150}
+                height={55}
+                className="h-auto w-[150px] object-contain"
+              />
+            </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/60">
-              Your trusted travel partner for air tickets, international
-              tours, tourist visas and personalized travel experiences.
+              Your trusted travel partner for air tickets, international tours,
+              tourist visas and personalized travel experiences.
             </p>
 
             {/* Social */}
-            {/* <div className="mt-6 flex gap-3">
+            <div className="mt-6 flex gap-3">
               <SocialIcon href="#" label="Facebook">
-                <Facebook size={18} />
+                <FaFacebookF size={17} />
               </SocialIcon>
 
               <SocialIcon href="#" label="Instagram">
-                <Instagram size={18} />
+                <FaInstagram size={18} />
               </SocialIcon>
 
               <SocialIcon href="#" label="YouTube">
-                <Youtube size={18} />
+                <FaYoutube size={18} />
               </SocialIcon>
 
               <SocialIcon href="#" label="LinkedIn">
-                <Linkedin size={18} />
+                <FaLinkedinIn size={17} />
               </SocialIcon>
-            </div> */}
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -183,9 +184,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-white/50 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-          <p>
-            © {new Date().getFullYear()} SB Flight. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} SB Flight. All rights reserved.</p>
 
           <div className="flex gap-5">
             <Link
@@ -195,17 +194,11 @@ export default function Footer() {
               Privacy
             </Link>
 
-            <Link
-              href="/terms"
-              className="transition hover:text-white"
-            >
+            <Link href="/terms" className="transition hover:text-white">
               Terms
             </Link>
 
-            <Link
-              href="/refund-policy"
-              className="transition hover:text-white"
-            >
+            <Link href="/refund-policy" className="transition hover:text-white">
               Refund Policy
             </Link>
           </div>

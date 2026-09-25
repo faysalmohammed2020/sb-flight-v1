@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
+/* =========================================================
+   SB FLIGHT — GLOBAL DESIGN SYSTEM
+   ========================================================= */
+
 :root {
-  /* ========================================
-     SB FLIGHT BRAND COLORS
-     ======================================== */
+  /* =======================================================
+     BRAND COLORS
+     ======================================================= */
 
   --background: #f7fafc;
   --foreground: #102a36;
@@ -22,36 +26,36 @@
   --white: #ffffff;
   --black: #000000;
 
-  /* ========================================
+  /* =======================================================
      TEXT
-     ======================================== */
+     ======================================================= */
 
   --text-primary: #102a36;
   --text-secondary: #526a74;
   --text-muted: #7c9199;
   --text-white: #ffffff;
 
-  /* ========================================
+  /* =======================================================
      SURFACE
-     ======================================== */
+     ======================================================= */
 
   --surface: #ffffff;
   --surface-soft: #f7fafc;
   --surface-blue: #eef9fc;
   --surface-gold: #fff9eb;
 
-  /* ========================================
+  /* =======================================================
      BORDER
-     ======================================== */
+     ======================================================= */
 
   --border: #dce8ed;
   --border-light: #eaf1f4;
   --border-primary: #b9e2ed;
   --border-gold: #f7d98d;
 
-  /* ========================================
-     STATUS COLORS
-     ======================================== */
+  /* =======================================================
+     STATUS
+     ======================================================= */
 
   --success: #16a34a;
   --success-light: #eaf8ef;
@@ -65,19 +69,20 @@
   --info: #2563eb;
   --info-light: #eef4ff;
 
-  /* ========================================
+  /* =======================================================
      SHADOW
-     ======================================== */
+     ======================================================= */
 
   --shadow-sm: 0 2px 8px rgba(11, 37, 51, 0.06);
   --shadow-md: 0 8px 25px rgba(11, 37, 51, 0.08);
   --shadow-lg: 0 15px 40px rgba(11, 37, 51, 0.12);
+
   --shadow-blue: 0 10px 30px rgba(35, 156, 192, 0.18);
   --shadow-gold: 0 10px 30px rgba(244, 169, 26, 0.18);
 
-  /* ========================================
+  /* =======================================================
      RADIUS
-     ======================================== */
+     ======================================================= */
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -85,9 +90,9 @@
   --radius-xl: 20px;
   --radius-2xl: 28px;
 
-  /* ========================================
+  /* =======================================================
      TRANSITION
-     ======================================== */
+     ======================================================= */
 
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
@@ -95,9 +100,9 @@
 }
 
 
-/* ========================================
+/* =========================================================
    BASE
-   ======================================== */
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -111,10 +116,12 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
+
   font-family:
     Arial,
     Helvetica,
     sans-serif;
+
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -141,9 +148,9 @@ img {
 }
 
 
-/* ========================================
-   TEXT UTILITIES
-   ======================================== */
+/* =========================================================
+   TEXT
+   ========================================================= */
 
 .text-primary {
   color: var(--primary);
@@ -162,9 +169,9 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    BRAND GRADIENTS
-   ======================================== */
+   ========================================================= */
 
 .bg-brand-gradient {
   background: linear-gradient(
@@ -199,6 +206,7 @@ img {
     #239cc0,
     #087ea3
   );
+
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -210,24 +218,29 @@ img {
     #d98d00,
     #f4a91a
   );
+
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 
-/* ========================================
+/* =========================================================
    HEADER
-   ======================================== */
+   ========================================================= */
 
 .site-header {
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--border-light);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 50;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid var(--border-light);
+
+  box-shadow: var(--shadow-sm);
+
+  backdrop-filter: blur(12px);
 }
 
 .site-header-dark {
@@ -236,14 +249,17 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    NAVIGATION
-   ======================================== */
+   ========================================================= */
 
 .nav-link {
   position: relative;
+
   color: var(--text-primary);
+
   font-weight: 500;
+
   transition: color var(--transition-normal);
 }
 
@@ -257,19 +273,24 @@ img {
 
 .nav-link.active::after {
   content: "";
+
   position: absolute;
+
   left: 0;
   right: 0;
   bottom: -8px;
+
   height: 2px;
+
   border-radius: 999px;
+
   background: var(--secondary);
 }
 
 
-/* ========================================
-   PRIMARY BUTTON
-   ======================================== */
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .btn-primary {
   display: inline-flex;
@@ -299,11 +320,6 @@ img {
   transform: translateY(-1px);
 }
 
-
-/* ========================================
-   GOLD BUTTON
-   ======================================== */
-
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -332,11 +348,6 @@ img {
   transform: translateY(-1px);
 }
 
-
-/* ========================================
-   OUTLINE BUTTON
-   ======================================== */
-
 .btn-outline {
   display: inline-flex;
   align-items: center;
@@ -362,9 +373,9 @@ img {
 }
 
 
-/* ========================================
-   HERO SECTION
-   ======================================== */
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero-section {
   position: relative;
@@ -393,6 +404,7 @@ img {
 
 .hero-section::before {
   content: "";
+
   position: absolute;
   inset: 0;
 
@@ -408,9 +420,9 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    SECTION
-   ======================================== */
+   ========================================================= */
 
 .section {
   padding: 80px 0;
@@ -430,19 +442,22 @@ img {
 
 .section-title {
   color: var(--navy);
+
   font-weight: 800;
+
   letter-spacing: -0.02em;
 }
 
 .section-subtitle {
-  color: var(--text-secondary);
   max-width: 650px;
+
+  color: var(--text-secondary);
 }
 
 
-/* ========================================
+/* =========================================================
    CARDS
-   ======================================== */
+   ========================================================= */
 
 .card {
   background: var(--surface);
@@ -461,7 +476,9 @@ img {
 
 .card:hover {
   transform: translateY(-4px);
+
   border-color: var(--border-primary);
+
   box-shadow: var(--shadow-md);
 }
 
@@ -476,9 +493,9 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    TOUR CARD
-   ======================================== */
+   ========================================================= */
 
 .tour-card {
   overflow: hidden;
@@ -496,6 +513,7 @@ img {
 
 .tour-card:hover {
   transform: translateY(-5px);
+
   box-shadow: var(--shadow-lg);
 }
 
@@ -513,9 +531,9 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    PRICE
-   ======================================== */
+   ========================================================= */
 
 .price {
   color: var(--primary);
@@ -528,25 +546,11 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    BADGES
-   ======================================== */
+   ========================================================= */
 
-.badge-primary {
-  display: inline-flex;
-  align-items: center;
-
-  padding: 5px 10px;
-
-  border-radius: 999px;
-
-  background: var(--primary-light);
-  color: var(--primary-dark);
-
-  font-size: 12px;
-  font-weight: 700;
-}
-
+.badge-primary,
 .badge-gold {
   display: inline-flex;
   align-items: center;
@@ -555,17 +559,24 @@ img {
 
   border-radius: 999px;
 
-  background: var(--secondary-light);
-  color: var(--secondary-dark);
-
   font-size: 12px;
   font-weight: 700;
 }
 
+.badge-primary {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
 
-/* ========================================
-   FORM ELEMENTS
-   ======================================== */
+.badge-gold {
+  background: var(--secondary-light);
+  color: var(--secondary-dark);
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
 
 .form-input,
 .form-select,
@@ -573,6 +584,7 @@ img {
   width: 100%;
 
   background: var(--white);
+
   color: var(--text-primary);
 
   border: 1px solid var(--border);
@@ -603,12 +615,13 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    FOOTER
-   ======================================== */
+   ========================================================= */
 
 .site-footer {
   background: var(--navy);
+
   color: #d9e8ed;
 }
 
@@ -619,6 +632,7 @@ img {
 
 .site-footer a {
   color: #b8ced6;
+
   transition: color var(--transition-normal);
 }
 
@@ -628,13 +642,14 @@ img {
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+
   color: #91aab4;
 }
 
 
-/* ========================================
-   SOCIAL ICON
-   ======================================== */
+/* =========================================================
+   SOCIAL
+   ========================================================= */
 
 .social-icon {
   display: inline-flex;
@@ -655,52 +670,400 @@ img {
 
 .social-icon:hover {
   background: var(--secondary);
+
   color: var(--navy);
 
   transform: translateY(-2px);
 }
 
 
-/* ========================================
-   DASHBOARD
-   ======================================== */
+/* =========================================================
+   SB FLIGHT DASHBOARD SIDEBAR
+   ========================================================= */
 
 .dashboard-sidebar {
-  background: var(--navy);
+  background:
+    linear-gradient(
+      180deg,
+      #0b2533 0%,
+      #0a2938 55%,
+      #071d29 100%
+    );
+
   color: var(--white);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
 }
+
+
+/* Sidebar logo */
+
+.dashboard-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 72px;
+
+  padding: 14px 18px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-sidebar-logo img {
+  width: auto;
+  height: 42px;
+
+  max-width: 150px;
+
+  object-fit: contain;
+}
+
+.dashboard-sidebar-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-sidebar-brand-name {
+  color: var(--white);
+
+  font-size: 17px;
+  font-weight: 800;
+
+  line-height: 1.1;
+}
+
+.dashboard-sidebar-brand-tagline {
+  margin-top: 3px;
+
+  color: #8fb7c4;
+
+  font-size: 10px;
+  font-weight: 500;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* Sidebar section */
+
+.dashboard-sidebar-section {
+  margin-top: 20px;
+}
+
+.dashboard-sidebar-section-title {
+  padding: 0 14px;
+
+  margin-bottom: 7px;
+
+  color: #6f929f;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+
+  text-transform: uppercase;
+}
+
+
+/* Sidebar links */
 
 .dashboard-sidebar-link {
   display: flex;
   align-items: center;
   gap: 10px;
 
-  padding: 11px 14px;
+  width: 100%;
+
+  padding: 10px 12px;
 
   border-radius: var(--radius-md);
 
   color: #b8ced6;
 
-  transition: all var(--transition-normal);
+  font-size: 13px;
+  font-weight: 500;
+
+  transition:
+    background var(--transition-normal),
+    color var(--transition-normal),
+    transform var(--transition-fast);
 }
 
 .dashboard-sidebar-link:hover {
-  background: rgba(35, 156, 192, 0.15);
+  background: rgba(35, 156, 192, 0.13);
+
   color: var(--white);
+
+  transform: translateX(2px);
 }
 
 .dashboard-sidebar-link.active {
-  background: var(--primary);
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+
+  color: var(--white);
+
+  box-shadow:
+    0 5px 18px rgba(35, 156, 192, 0.22);
+}
+
+.dashboard-sidebar-link.active svg {
   color: var(--white);
 }
 
 
-/* ========================================
+/* Submenu */
+
+.dashboard-sidebar-submenu {
+  margin-left: 17px;
+
+  padding-left: 12px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-sidebar-submenu .dashboard-sidebar-link {
+  padding: 8px 10px;
+
+  font-size: 12px;
+}
+
+
+/* Sidebar user */
+
+.dashboard-sidebar-user {
+  margin: 12px;
+
+  padding: 12px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: var(--radius-lg);
+}
+
+.dashboard-sidebar-user:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* Avatar */
+
+.dashboard-sidebar-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+
+  color: var(--white);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+
+/* Sidebar scrollbar */
+
+.dashboard-sidebar-scroll {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    #315766
+    transparent;
+}
+
+.dashboard-sidebar-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dashboard-sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #315766;
+
+  border-radius: 999px;
+}
+
+.dashboard-sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+   ========================================================= */
+
+.dashboard-header {
+  position: sticky;
+  top: 0;
+
+  z-index: 40;
+
+  height: 64px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid var(--border-light);
+
+  box-shadow: var(--shadow-sm);
+
+  backdrop-filter: blur(12px);
+}
+
+
+/* Search */
+
+.dashboard-header-search {
+  width: 100%;
+
+  max-width: 420px;
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-md);
+
+  color: var(--text-primary);
+
+  outline: none;
+
+  transition:
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    background var(--transition-normal);
+}
+
+.dashboard-header-search::placeholder {
+  color: var(--text-muted);
+}
+
+.dashboard-header-search:focus {
+  background: var(--white);
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(35, 156, 192, 0.12);
+}
+
+
+/* Header icon */
+
+.dashboard-header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: var(--radius-md);
+
+  color: var(--text-secondary);
+
+  transition: all var(--transition-normal);
+}
+
+.dashboard-header-icon:hover {
+  background: var(--primary-light);
+
+  color: var(--primary);
+}
+
+
+/* Header profile */
+
+.dashboard-header-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 8px;
+
+  border-radius: var(--radius-md);
+
+  transition: background var(--transition-normal);
+}
+
+.dashboard-header-profile:hover {
+  background: var(--surface-soft);
+}
+
+.dashboard-header-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+
+  color: var(--white);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+/* Notification badge */
+
+.dashboard-notification-badge {
+  position: absolute;
+
+  top: 5px;
+  right: 5px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--secondary);
+
+  border: 2px solid var(--white);
+}
+
+
+/* =========================================================
    ADMIN
-   ======================================== */
+   ========================================================= */
 
 .admin-sidebar {
   background: #071d29;
+
   color: var(--white);
 }
 
@@ -712,18 +1075,20 @@ img {
 
 .admin-sidebar-link:hover {
   color: var(--white);
+
   background: rgba(35, 156, 192, 0.12);
 }
 
 .admin-sidebar-link.active {
   background: var(--primary);
+
   color: var(--white);
 }
 
 
-/* ========================================
+/* =========================================================
    STAT CARDS
-   ======================================== */
+   ========================================================= */
 
 .stat-card {
   background: var(--white);
@@ -738,28 +1103,30 @@ img {
 }
 
 .stat-card-icon {
-  width: 44px;
-  height: 44px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
+  width: 44px;
+  height: 44px;
+
   border-radius: var(--radius-md);
 
   background: var(--primary-light);
+
   color: var(--primary);
 }
 
 .stat-card.gold .stat-card-icon {
   background: var(--secondary-light);
+
   color: var(--secondary-dark);
 }
 
 
-/* ========================================
+/* =========================================================
    TABLE
-   ======================================== */
+   ========================================================= */
 
 .table-container {
   overflow: hidden;
@@ -775,6 +1142,7 @@ img {
 
 .table-container th {
   background: #f3f8fa;
+
   color: var(--navy);
 
   font-weight: 700;
@@ -793,9 +1161,9 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    DIVIDER
-   ======================================== */
+   ========================================================= */
 
 .brand-divider {
   width: 60px;
@@ -803,17 +1171,18 @@ img {
 
   border-radius: 999px;
 
-  background: linear-gradient(
-    90deg,
-    var(--primary),
-    var(--secondary)
-  );
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      var(--secondary)
+    );
 }
 
 
-/* ========================================
+/* =========================================================
    SCROLLBAR
-   ======================================== */
+   ========================================================= */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -826,6 +1195,7 @@ img {
 
 ::-webkit-scrollbar-thumb {
   background: #9fc6d2;
+
   border-radius: 999px;
 }
 
@@ -834,29 +1204,37 @@ img {
 }
 
 
-/* ========================================
+/* =========================================================
    SELECTION
-   ======================================== */
+   ========================================================= */
 
 ::selection {
   background: rgba(35, 156, 192, 0.22);
+
   color: var(--navy);
 }
 
 
-/* ========================================
+/* =========================================================
    FOCUS
-   ======================================== */
+   ========================================================= */
 
 :focus-visible {
   outline: 2px solid var(--primary);
+
   outline-offset: 2px;
 }
 
 
-/* ========================================
+/* =========================================================
    RESPONSIVE
-   ======================================== */
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .dashboard-header-search {
+    max-width: 300px;
+  }
+}
 
 @media (max-width: 768px) {
   .section {
@@ -866,5 +1244,17 @@ img {
   .hero-section {
     padding-top: 50px;
     padding-bottom: 50px;
+  }
+
+  .dashboard-header {
+    height: 60px;
+  }
+
+  .dashboard-sidebar-logo {
+    min-height: 64px;
+  }
+
+  .dashboard-sidebar-logo img {
+    height: 38px;
   }
 }
