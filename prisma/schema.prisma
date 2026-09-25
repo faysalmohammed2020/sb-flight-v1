@@ -1,0 +1,2304 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  BLOCKED
+  PENDING
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  STAFF
+  SALES
+  ACCOUNTANT
+  OPERATIONS
+  VISA_AGENT
+  TICKET_AGENT
+  TOUR_AGENT
+  CONTENT_MANAGER
+  SUPPORT_AGENT
+  B2B_AGENT
+  CUSTOMER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum EmploymentStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  RESIGNED
+  TERMINATED
+}
+
+enum TourStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  SOLD_OUT
+  COMPLETED
+  CANCELLED
+}
+
+enum TourType {
+  GROUP
+  PRIVATE
+  CUSTOM
+  HONEYMOON
+  FAMILY
+  CORPORATE
+  ADVENTURE
+  RELIGIOUS
+  EDUCATIONAL
+  DOMESTIC
+  INTERNATIONAL
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  PARTIALLY_PAID
+  FULLY_PAID
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  PARTIAL
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  BKASH
+  NAGAD
+  ROCKET
+  CARD
+  SSL_COMMERZ
+  AAMARPAY
+  STRIPE
+  PAYPAL
+  OTHER
+}
+
+enum PaymentDirection {
+  INCOME
+  EXPENSE
+  REFUND
+}
+
+enum TravelerType {
+  ADULT
+  CHILD
+  INFANT
+}
+
+enum CommissionStatus {
+  PENDING
+  APPROVED
+  PAID
+  CANCELLED
+}
+
+enum WithdrawalStatus {
+  PENDING
+  APPROVED
+  PROCESSING
+  PAID
+  REJECTED
+  CANCELLED
+}
+
+enum WithdrawalMethod {
+  BANK
+  BKASH
+  NAGAD
+  ROCKET
+  CASH
+}
+
+enum CouponType {
+  FIXED
+  PERCENTAGE
+}
+
+enum NotificationType {
+  SYSTEM
+  BOOKING
+  PAYMENT
+  TOUR
+  TICKET
+  VISA
+  REFERRAL
+  SUPPORT
+  PROMOTION
+}
+
+enum TicketRequestStatus {
+  PENDING
+  QUOTED
+  CUSTOMER_APPROVED
+  PAYMENT_PENDING
+  CONFIRMED
+  TICKETED
+  CANCELLED
+  REFUNDED
+  VOID
+  REISSUE
+}
+
+enum TicketType {
+  ONE_WAY
+  ROUND_TRIP
+  MULTI_CITY
+}
+
+enum TicketPassengerType {
+  ADULT
+  CHILD
+  INFANT
+}
+
+enum TicketDocumentStatus {
+  PENDING
+  UPLOADED
+  VERIFIED
+  REJECTED
+}
+
+enum VisaStatus {
+  DRAFT
+  DOCUMENT_PENDING
+  DOCUMENT_SUBMITTED
+  UNDER_REVIEW
+  PROCESSING
+  ADDITIONAL_DOCUMENT_REQUIRED
+  APPOINTMENT
+  SUBMITTED_TO_EMBASSY
+  APPROVED
+  REJECTED
+  WITHDRAWN
+  COMPLETED
+  CANCELLED
+}
+
+enum VisaDocumentStatus {
+  REQUIRED
+  PENDING
+  UPLOADED
+  VERIFIED
+  REJECTED
+}
+
+enum DocumentType {
+  PASSPORT
+  NID
+  BIRTH_CERTIFICATE
+  PHOTO
+  BANK_STATEMENT
+  BANK_SOLVENCY
+  TRADE_LICENSE
+  TAX_DOCUMENT
+  AIR_TICKET
+  HOTEL_BOOKING
+  VISA
+  INSURANCE
+  INVITATION_LETTER
+  EMPLOYMENT_LETTER
+  NOC
+  OTHER
+}
+
+enum DocumentStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  EXPIRED
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING_CUSTOMER
+  RESOLVED
+  CLOSED
+}
+
+enum SupportPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum AITripStatus {
+  DRAFT
+  GENERATING
+  GENERATED
+  APPROVED
+  CONVERTED
+  CANCELLED
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  QUOTED
+  NEGOTIATION
+  WON
+  LOST
+  CONVERTED
+}
+
+enum LeadSource {
+  WEBSITE
+  FACEBOOK
+  INSTAGRAM
+  WHATSAPP
+  REFERRAL
+  B2B
+  WALK_IN
+  PHONE
+  EMAIL
+  OTHER
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum SupplierType {
+  AIRLINE
+  HOTEL
+  TRANSPORT
+  DMC
+  GUIDE
+  VISA_PARTNER
+  TOUR_OPERATOR
+  ACTIVITY_PROVIDER
+  INSURANCE
+  OTHER
+}
+
+enum SupplierStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum AgentType {
+  B2B
+  CORPORATE
+  SUB_AGENT
+  FREELANCER
+  OTHER
+}
+
+enum AgentStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  BLOCKED
+}
+
+enum CommissionType {
+  FIXED
+  PERCENTAGE
+}
+
+enum ExpenseCategory {
+  OFFICE
+  TRANSPORT
+  HOTEL
+  AIR_TICKET
+  VISA
+  TOUR
+  MARKETING
+  SALARY
+  COMMISSION
+  SUPPLIER
+  REFUND
+  UTILITY
+  OTHER
+}
+
+enum LedgerAccountType {
+  ASSET
+  LIABILITY
+  EQUITY
+  REVENUE
+  EXPENSE
+}
+
+enum JournalStatus {
+  DRAFT
+  POSTED
+  VOID
+}
+
+enum InvoiceStatus {
+  DRAFT
+  ISSUED
+  PARTIAL
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  VIEWED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  CANCELLED
+}
+
+enum ComponentType {
+  HOTEL
+  TRANSPORT
+  FLIGHT
+  VISA
+  ACTIVITY
+  GUIDE
+  MEAL
+  INSURANCE
+  OTHER
+}
+
+enum RoomType {
+  SINGLE
+  DOUBLE
+  TWIN
+  TRIPLE
+  FAMILY
+  SUITE
+  OTHER
+}
+
+enum TransportType {
+  BUS
+  CAR
+  MICROBUS
+  HIACE
+  COASTER
+  TRAIN
+  FLIGHT
+  BOAT
+  JEEP
+  OTHER
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ContactStatus {
+  NEW
+  IN_PROGRESS
+  RESPONDED
+  CLOSED
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum WalletTransactionType {
+  CREDIT
+  DEBIT
+  REFUND
+  COMMISSION
+  WITHDRAWAL
+  ADJUSTMENT
+}
+
+enum ReferralStatus {
+  PENDING
+  QUALIFIED
+  CONVERTED
+  CANCELLED
+}
+
+enum ContractStatus {
+  DRAFT
+  ACTIVE
+  EXPIRED
+  TERMINATED
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  UNAVAILABLE
+  LIMITED
+}
+
+enum PricingType {
+  PER_PERSON
+  PER_ROOM
+  PER_VEHICLE
+  PER_BOOKING
+  PER_DAY
+  PER_UNIT
+}
+
+// ============================================================
+// USER / AUTH / CRM
+// ============================================================
+
+model User {
+  id             String    @id @default(cuid())
+  firstName      String
+  lastName       String?
+  email          String?   @unique
+  phone          String?   @unique
+  password       String?
+  image          String?
+  dateOfBirth    DateTime?
+  gender         Gender?
+  nationality    String?
+  passportNumber String?
+  nidNumber      String?
+  address        String?
+  city           String?
+  country        String?   @default("Bangladesh")
+
+  role   UserRole   @default(CUSTOMER)
+  status UserStatus @default(ACTIVE)
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id])
+
+  employeeProfile Employee?
+  customerProfile CustomerProfile?
+  b2bAgentProfile B2BAgent?
+
+  bookings          Booking[]
+  payments          Payment[]
+  invoices          Invoice[]
+  documents         UserDocument[]
+  reviews           Review[]
+  notifications     Notification[]
+  supportTickets    SupportTicket[]
+  aiTrips           AITrip[]
+  referralsMade     Referral[]      @relation("Referrer")
+  referralsReceived Referral[]      @relation("ReferredUser")
+  wallet            Wallet?
+  withdrawals       Withdrawal[]
+
+  leads         Lead[]
+  assignedLeads Lead[] @relation("AssignedLead")
+  tasksCreated  Task[] @relation("TaskCreator")
+  tasksAssigned Task[] @relation("TaskAssignee")
+
+  auditLogs AuditLog[]
+
+  createdTours Tour[] @relation("TourCreator")
+  updatedTours Tour[] @relation("TourUpdater")
+
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  tourQuotations   TourQuotation[]
+  ticketRequests   TicketRequest[]
+  visaApplications VisaApplication[]
+  blogPosts        BlogPost[]
+
+  @@index([role])
+  @@index([status])
+  @@index([branchId])
+}
+
+model HomePage {
+  id                  String  @id @default(cuid())
+  heroBadge           String?
+  heroTitle           String?
+  heroHighlight       String?
+  heroDescription     String?
+  heroImage           String?
+  heroMobileImage     String?
+  primaryButtonText   String?
+  primaryButtonLink   String?
+  secondaryButtonText String?
+  secondaryButtonLink String?
+  isPublished         Boolean @default(true)
+
+  sections HomePageSection[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HomePageSection {
+  id String @id @default(cuid())
+
+  homePageId String
+  homePage   HomePage @relation(fields: [homePageId], references: [id], onDelete: Cascade)
+
+  sectionKey String
+  title      String?
+  subtitle   String?
+  content    Json?
+
+  isEnabled Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([homePageId])
+  @@index([sectionKey])
+}
+
+model CustomerProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  occupation        String?
+  companyName       String?
+  emergencyName     String?
+  emergencyPhone    String?
+  emergencyRelation String?
+  preferredCurrency String? @default("BDT")
+  preferredLanguage String? @default("en")
+  notes             String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Employee {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  employeeCode   String           @unique
+  designation    String?
+  department     String?
+  joiningDate    DateTime?
+  leavingDate    DateTime?
+  salary         Decimal?         @db.Decimal(14, 2)
+  commissionRate Decimal?         @db.Decimal(8, 2)
+  status         EmploymentStatus @default(ACTIVE)
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// BRANCH
+// ============================================================
+
+model Branch {
+  id        String        @id @default(cuid())
+  name      String
+  code      String        @unique
+  address   String?
+  phone     String?
+  email     String?
+  managerId String?
+  status    AccountStatus @default(ACTIVE)
+
+  users     User[]
+  employees Employee[]
+  bookings  Booking[]
+  expenses  Expense[]
+  leads     Lead[]
+  invoices  Invoice[]
+  payments  Payment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// DESTINATION
+// ============================================================
+
+model Country {
+  id           String  @id @default(cuid())
+  name         String
+  code         String  @unique
+  currency     String?
+  currencyCode String?
+  timezone     String?
+  visaRequired Boolean @default(false)
+
+  destinations Destination[]
+  visaTypes    VisaType[]
+  tours        Tour[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Destination {
+  id        String  @id @default(cuid())
+  countryId String
+  country   Country @relation(fields: [countryId], references: [id])
+
+  name             String
+  slug             String   @unique
+  description      String?
+  shortDescription String?
+  image            String?
+  coverImage       String?
+  latitude         Decimal? @db.Decimal(10, 7)
+  longitude        Decimal? @db.Decimal(10, 7)
+  isFeatured       Boolean  @default(false)
+  isActive         Boolean  @default(true)
+
+  tours       Tour[]
+  activities  Activity[]
+  aiTrips     AITrip[]
+  attractions Attraction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([countryId])
+}
+
+model Attraction {
+  id            String      @id @default(cuid())
+  destinationId String
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  name        String
+  description String?
+  image       String?
+  entryFee    Decimal? @db.Decimal(14, 2)
+  currency    String?  @default("NPR")
+  latitude    Decimal? @db.Decimal(10, 7)
+  longitude   Decimal? @db.Decimal(10, 7)
+  isActive    Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// TOUR MANAGEMENT
+// ============================================================
+
+model TourCategory {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String?
+  image       String?
+  isActive    Boolean @default(true)
+
+  tours Tour[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tour {
+  id         String        @id @default(cuid())
+  categoryId String?
+  category   TourCategory? @relation(fields: [categoryId], references: [id])
+
+  countryId String?
+  country   Country? @relation(fields: [countryId], references: [id])
+
+  destinationId String?
+  destination   Destination? @relation(fields: [destinationId], references: [id])
+
+  createdById String?
+  createdBy   User?   @relation("TourCreator", fields: [createdById], references: [id])
+
+  updatedById String?
+  updatedBy   User?   @relation("TourUpdater", fields: [updatedById], references: [id])
+
+  aiTripId String? @unique
+  aiTrip   AITrip? @relation("AITripGeneratedTour", fields: [aiTripId], references: [id])
+
+  name String
+  slug String  @unique
+  code String? @unique
+
+  shortDescription String?
+  description      String?
+  coverImage       String?
+
+  durationDays   Int
+  durationNights Int
+
+  tourType TourType   @default(GROUP)
+  status   TourStatus @default(DRAFT)
+
+  currency String @default("BDT")
+
+  baseCost     Decimal? @db.Decimal(14, 2)
+  sellingPrice Decimal? @db.Decimal(14, 2)
+  adultPrice   Decimal? @db.Decimal(14, 2)
+  childPrice   Decimal? @db.Decimal(14, 2)
+  infantPrice  Decimal? @db.Decimal(14, 2)
+
+  minTravelers Int?
+  maxTravelers Int?
+
+  bookingDeadline    DateTime?
+  termsConditions    String?
+  cancellationPolicy String?
+
+  images      TourImage[]
+  itineraries TourItinerary[]
+  dates       TourDate[]
+  activities  TourActivity[]
+  components  TourComponent[]
+  costs       TourCost[]
+  bookings    Booking[]
+  reviews     Review[]
+  quotations  TourQuotation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([countryId])
+  @@index([destinationId])
+  @@index([categoryId])
+}
+
+model TourImage {
+  id     String @id @default(cuid())
+  tourId String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  url       String
+  altText   String?
+  sortOrder Int     @default(0)
+  isCover   Boolean @default(false)
+
+  createdAt DateTime @default(now())
+}
+
+model TourItinerary {
+  id     String @id @default(cuid())
+  tourId String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  dayNumber     Int
+  title         String
+  description   String?
+  meals         String?
+  accommodation String?
+  transport     String?
+  activities    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tourId, dayNumber])
+}
+
+model TourDate {
+  id     String @id @default(cuid())
+  tourId String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  startDate DateTime
+  endDate   DateTime
+
+  totalSeats     Int?
+  availableSeats Int?
+  bookedSeats    Int  @default(0)
+
+  price  Decimal?   @db.Decimal(14, 2)
+  status TourStatus @default(ACTIVE)
+
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tourId, startDate])
+}
+
+model Activity {
+  id            String       @id @default(cuid())
+  destinationId String?
+  destination   Destination? @relation(fields: [destinationId], references: [id])
+
+  name            String
+  description     String?
+  image           String?
+  durationMinutes Int?
+  price           Decimal? @db.Decimal(14, 2)
+  currency        String?
+  isActive        Boolean  @default(true)
+
+  tours TourActivity[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TourActivity {
+  id     String @id @default(cuid())
+  tourId String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  activityId String
+  activity   Activity @relation(fields: [activityId], references: [id])
+
+  dayNumber    Int?
+  quantity     Int      @default(1)
+  cost         Decimal? @db.Decimal(14, 2)
+  sellingPrice Decimal? @db.Decimal(14, 2)
+
+  @@unique([tourId, activityId, dayNumber])
+}
+
+// ============================================================
+// TOUR COMPONENT / COSTING
+// ============================================================
+
+model TourComponent {
+  id     String @id @default(cuid())
+  tourId String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  type        ComponentType
+  name        String
+  description String?
+
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id])
+
+  pricingType PricingType @default(PER_PERSON)
+
+  quantity  Decimal? @db.Decimal(14, 2)
+  unitCost  Decimal? @db.Decimal(14, 2)
+  totalCost Decimal? @db.Decimal(14, 2)
+
+  sellingPrice Decimal? @db.Decimal(14, 2)
+
+  dayNumber  Int?
+  isIncluded Boolean @default(true)
+  isOptional Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TourCost {
+  id     String @id @default(cuid())
+  tourId String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  name     String
+  category ExpenseCategory
+
+  estimatedCost Decimal  @db.Decimal(14, 2)
+  actualCost    Decimal? @db.Decimal(14, 2)
+
+  quantity Decimal? @db.Decimal(14, 2)
+  notes    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// HOTEL / TRANSPORT / SUPPLIER
+// ============================================================
+
+model Supplier {
+  id   String  @id @default(cuid())
+  name String
+  code String? @unique
+
+  type   SupplierType
+  status SupplierStatus @default(ACTIVE)
+
+  contactPerson String?
+  phone         String?
+  email         String?
+  address       String?
+  country       String?
+  city          String?
+
+  taxNumber      String?
+  registrationNo String?
+
+  notes String?
+
+  contracts      SupplierContract[]
+  tourComponents TourComponent[]
+  bookings       SupplierBooking[]
+  invoices       SupplierInvoice[]
+  payments       SupplierPayment[]
+  expenses       Expense[]
+  hotels         Hotel[]
+  transport      TransportService[]
+  guides         Guide[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+}
+
+model SupplierContract {
+  id         String   @id @default(cuid())
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+
+  contractNo String?
+  startDate  DateTime
+  endDate    DateTime?
+  status     ContractStatus @default(DRAFT)
+
+  currency String  @default("BDT")
+  terms    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Hotel {
+  id         String    @id @default(cuid())
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id])
+
+  name        String
+  city        String?
+  country     String?
+  address     String?
+  starRating  Int?
+  phone       String?
+  email       String?
+  description String?
+  image       String?
+
+  rooms HotelRoom[]
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HotelRoom {
+  id      String @id @default(cuid())
+  hotelId String
+  hotel   Hotel  @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+
+  name      String
+  type      RoomType
+  maxGuests Int?
+  mealPlan  String?
+
+  costPerNight    Decimal? @db.Decimal(14, 2)
+  sellingPerNight Decimal? @db.Decimal(14, 2)
+  currency        String   @default("BDT")
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TransportService {
+  id         String    @id @default(cuid())
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id])
+
+  name          String
+  type          TransportType
+  vehicleNumber String?
+  capacity      Int?
+
+  route    String?
+  cost     Decimal? @db.Decimal(14, 2)
+  currency String   @default("BDT")
+
+  driverName  String?
+  driverPhone String?
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Guide {
+  id         String    @id @default(cuid())
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id])
+
+  name        String
+  phone       String?
+  email       String?
+  language    String?
+  destination String?
+  dailyRate   Decimal? @db.Decimal(14, 2)
+  currency    String   @default("BDT")
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SupplierBooking {
+  id         String   @id @default(cuid())
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+
+  bookingId String?
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+
+  referenceNo String?
+  serviceDate DateTime?
+  amount      Decimal   @db.Decimal(14, 2)
+  paidAmount  Decimal   @default(0) @db.Decimal(14, 2)
+  dueAmount   Decimal   @default(0) @db.Decimal(14, 2)
+
+  notes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SupplierInvoice {
+  id         String   @id @default(cuid())
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+
+  invoiceNo   String
+  invoiceDate DateTime
+  dueDate     DateTime?
+
+  subtotal   Decimal @db.Decimal(14, 2)
+  tax        Decimal @default(0) @db.Decimal(14, 2)
+  total      Decimal @db.Decimal(14, 2)
+  paidAmount Decimal @default(0) @db.Decimal(14, 2)
+  dueAmount  Decimal @default(0) @db.Decimal(14, 2)
+
+  status InvoiceStatus @default(ISSUED)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([supplierId, invoiceNo])
+}
+
+model SupplierPayment {
+  id         String   @id @default(cuid())
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+
+  invoiceId   String?
+  amount      Decimal       @db.Decimal(14, 2)
+  method      PaymentMethod
+  reference   String?
+  paymentDate DateTime      @default(now())
+  notes       String?
+
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// B2B AGENT
+// ============================================================
+
+model B2BAgent {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  agentCode   String      @unique
+  companyName String
+  type        AgentType   @default(B2B)
+  status      AgentStatus @default(ACTIVE)
+
+  tradeLicense String?
+  tin          String?
+  bin          String?
+
+  contactPerson String?
+  businessEmail String?
+  businessPhone String?
+  address       String?
+
+  creditLimit Decimal? @db.Decimal(14, 2)
+  currentDue  Decimal  @default(0) @db.Decimal(14, 2)
+
+  commissionType  CommissionType?
+  commissionValue Decimal?        @db.Decimal(14, 2)
+
+  bookings   Booking[]
+  quotations TourQuotation[]
+  payments   Payment[]
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  ticketRequests TicketRequest[]
+}
+
+// ============================================================
+// TOUR QUOTATION / CUSTOM QUOTE
+// ============================================================
+
+model TourQuotation {
+  id          String @id @default(cuid())
+  quotationNo String @unique
+
+  tourId String?
+  tour   Tour?   @relation(fields: [tourId], references: [id])
+
+  customerId String?
+  customer   User?   @relation(fields: [customerId], references: [id])
+
+  agentId String?
+  agent   B2BAgent? @relation(fields: [agentId], references: [id])
+
+  title       String
+  description String?
+
+  numberOfAdults   Int @default(1)
+  numberOfChildren Int @default(0)
+  numberOfInfants  Int @default(0)
+
+  subtotal Decimal @db.Decimal(14, 2)
+  discount Decimal @default(0) @db.Decimal(14, 2)
+  tax      Decimal @default(0) @db.Decimal(14, 2)
+  total    Decimal @db.Decimal(14, 2)
+
+  validUntil DateTime?
+  status     QuoteStatus @default(DRAFT)
+
+  items TourQuotationItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TourQuotationItem {
+  id          String        @id @default(cuid())
+  quotationId String
+  quotation   TourQuotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+
+  description String
+  quantity    Decimal @default(1) @db.Decimal(14, 2)
+  unitPrice   Decimal @db.Decimal(14, 2)
+  total       Decimal @db.Decimal(14, 2)
+
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// BOOKING
+// ============================================================
+
+model Booking {
+  id        String @id @default(cuid())
+  bookingNo String @unique
+
+  customerId String
+  customer   User   @relation(fields: [customerId], references: [id])
+
+  agentId String?
+  agent   B2BAgent? @relation(fields: [agentId], references: [id])
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id])
+
+  tourId String?
+  tour   Tour?   @relation(fields: [tourId], references: [id])
+
+  tourDateId String?
+  tourDate   TourDate? @relation(fields: [tourDateId], references: [id])
+
+  status BookingStatus @default(PENDING)
+
+  currency    String  @default("BDT")
+  subtotal    Decimal @default(0) @db.Decimal(14, 2)
+  discount    Decimal @default(0) @db.Decimal(14, 2)
+  tax         Decimal @default(0) @db.Decimal(14, 2)
+  totalAmount Decimal @default(0) @db.Decimal(14, 2)
+  paidAmount  Decimal @default(0) @db.Decimal(14, 2)
+  dueAmount   Decimal @default(0) @db.Decimal(14, 2)
+
+  bookingDate DateTime @default(now())
+  notes       String?
+
+  travelers        BookingTraveler[]
+  statusHistory    BookingStatusHistory[]
+  payments         Payment[]
+  invoices         Invoice[]
+  documents        BookingDocument[]
+  couponUsages     CouponUsage[]
+  referral         Referral?
+  supplierBookings SupplierBooking[]
+  expenses         Expense[]
+  commissions      BookingCommission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+  @@index([status])
+  @@index([tourId])
+  @@index([bookingDate])
+}
+
+model BookingTraveler {
+  id        String  @id @default(cuid())
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  firstName      String
+  lastName       String?
+  gender         Gender?
+  dateOfBirth    DateTime?
+  nationality    String?
+  passportNumber String?
+  passportExpiry DateTime?
+  nidNumber      String?
+
+  type TravelerType @default(ADULT)
+
+  phone            String?
+  email            String?
+  emergencyContact String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BookingStatusHistory {
+  id        String  @id @default(cuid())
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  oldStatus   BookingStatus?
+  newStatus   BookingStatus
+  changedById String?
+  note        String?
+
+  createdAt DateTime @default(now())
+}
+
+model BookingDocument {
+  id        String  @id @default(cuid())
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  name       String
+  url        String
+  type       DocumentType
+  status     DocumentStatus @default(PENDING)
+  expiryDate DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// PAYMENT / INVOICE / FINANCE
+// ============================================================
+
+model Payment {
+  id        String @id @default(cuid())
+  paymentNo String @unique
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  bookingId String?
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id])
+
+  agentId String?
+  agent   B2BAgent? @relation(fields: [agentId], references: [id])
+
+  amount   Decimal @db.Decimal(14, 2)
+  currency String  @default("BDT")
+
+  method    PaymentMethod
+  direction PaymentDirection @default(INCOME)
+  status    PaymentStatus    @default(PENDING)
+
+  transactionId String?
+  reference     String?
+  gateway       String?
+
+  paidAt DateTime?
+  notes  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([bookingId])
+  @@index([userId])
+  @@index([status])
+}
+
+model Invoice {
+  id        String @id @default(cuid())
+  invoiceNo String @unique
+
+  customerId String?
+  customer   User?   @relation(fields: [customerId], references: [id])
+
+  bookingId String?
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id])
+
+  issueDate DateTime  @default(now())
+  dueDate   DateTime?
+
+  subtotal   Decimal @db.Decimal(14, 2)
+  discount   Decimal @default(0) @db.Decimal(14, 2)
+  tax        Decimal @default(0) @db.Decimal(14, 2)
+  total      Decimal @db.Decimal(14, 2)
+  paidAmount Decimal @default(0) @db.Decimal(14, 2)
+  dueAmount  Decimal @default(0) @db.Decimal(14, 2)
+
+  currency String        @default("BDT")
+  status   InvoiceStatus @default(DRAFT)
+
+  items InvoiceItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InvoiceItem {
+  id        String  @id @default(cuid())
+  invoiceId String
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  description String
+  quantity    Decimal @default(1) @db.Decimal(14, 2)
+  unitPrice   Decimal @db.Decimal(14, 2)
+  total       Decimal @db.Decimal(14, 2)
+
+  createdAt DateTime @default(now())
+}
+
+model Expense {
+  id        String @id @default(cuid())
+  expenseNo String @unique
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id])
+
+  bookingId String?
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id])
+
+  category    ExpenseCategory
+  description String
+
+  amount   Decimal @db.Decimal(14, 2)
+  currency String  @default("BDT")
+
+  method    PaymentMethod?
+  reference String?
+
+  expenseDate DateTime @default(now())
+  notes       String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BookingCommission {
+  id        String  @id @default(cuid())
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  userId  String?
+  agentId String?
+
+  type   CommissionType
+  value  Decimal        @db.Decimal(14, 2)
+  amount Decimal        @db.Decimal(14, 2)
+
+  status CommissionStatus @default(PENDING)
+  paidAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// COUPON
+// ============================================================
+
+model Coupon {
+  id          String  @id @default(cuid())
+  code        String  @unique
+  name        String?
+  description String?
+
+  type        CouponType
+  value       Decimal    @db.Decimal(14, 2)
+  maxDiscount Decimal?   @db.Decimal(14, 2)
+
+  minimumAmount Decimal? @db.Decimal(14, 2)
+  usageLimit    Int?
+  usedCount     Int      @default(0)
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  isActive Boolean @default(true)
+
+  usages CouponUsage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CouponUsage {
+  id String @id @default(cuid())
+
+  couponId String
+  coupon   Coupon @relation(fields: [couponId], references: [id], onDelete: Cascade)
+
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  userId String?
+
+  discountAmount Decimal @db.Decimal(14, 2)
+
+  createdAt DateTime @default(now())
+
+  @@unique([couponId, bookingId])
+}
+
+// ============================================================
+// REFERRAL / WALLET
+// ============================================================
+
+model Referral {
+  id String @id @default(cuid())
+
+  referrerId String
+  referrer   User   @relation("Referrer", fields: [referrerId], references: [id])
+
+  referredUserId String?
+  referredUser   User?   @relation("ReferredUser", fields: [referredUserId], references: [id])
+
+  bookingId String?  @unique
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+
+  referralCode String
+  status       ReferralStatus @default(PENDING)
+
+  commissionAmount Decimal? @db.Decimal(14, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([referrerId])
+  @@index([referralCode])
+}
+
+model Wallet {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  balance  Decimal @default(0) @db.Decimal(14, 2)
+  currency String  @default("BDT")
+
+  transactions WalletTransaction[]
+  withdrawals  Withdrawal[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WalletTransaction {
+  id       String @id @default(cuid())
+  walletId String
+  wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  type         WalletTransactionType
+  amount       Decimal               @db.Decimal(14, 2)
+  balanceAfter Decimal               @db.Decimal(14, 2)
+
+  reference   String?
+  description String?
+
+  createdAt DateTime @default(now())
+}
+
+model Withdrawal {
+  id       String @id @default(cuid())
+  walletId String
+  wallet   Wallet @relation(fields: [walletId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  amount Decimal          @db.Decimal(14, 2)
+  method WithdrawalMethod
+
+  accountName   String?
+  accountNumber String?
+
+  status WithdrawalStatus @default(PENDING)
+  note   String?
+
+  requestedAt DateTime  @default(now())
+  processedAt DateTime?
+}
+
+// ============================================================
+// AIR TICKET
+// ============================================================
+
+model TicketRequest {
+  id        String @id @default(cuid())
+  requestNo String @unique
+
+  customerId String?
+  customer   User?   @relation(fields: [customerId], references: [id])
+
+  agentId String?
+  agent   B2BAgent? @relation(fields: [agentId], references: [id])
+
+  type   TicketType
+  status TicketRequestStatus @default(PENDING)
+
+  origin        String
+  destination   String
+  departureDate DateTime
+  returnDate    DateTime?
+
+  adults   Int @default(1)
+  children Int @default(0)
+  infants  Int @default(0)
+
+  preferredAirline String?
+  preferredCabin   String?
+
+  specialRequest String?
+
+  passengers TicketPassenger[]
+  quotations TicketQuotation[]
+  tickets    AirTicket[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TicketPassenger {
+  id        String        @id @default(cuid())
+  requestId String
+  request   TicketRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  firstName      String
+  lastName       String?
+  type           TicketPassengerType
+  gender         Gender?
+  dateOfBirth    DateTime?
+  nationality    String?
+  passportNumber String?
+  passportExpiry DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TicketQuotation {
+  id        String        @id @default(cuid())
+  requestId String
+  request   TicketRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  quotationNo String @unique
+
+  airline       String?
+  flightDetails Json?
+
+  supplierCost Decimal @db.Decimal(14, 2)
+  baseFare     Decimal @db.Decimal(14, 2)
+  tax          Decimal @default(0) @db.Decimal(14, 2)
+  markup       Decimal @default(0) @db.Decimal(14, 2)
+  discount     Decimal @default(0) @db.Decimal(14, 2)
+
+  sellingPrice Decimal @db.Decimal(14, 2)
+  currency     String  @default("BDT")
+
+  validUntil DateTime?
+  status     QuoteStatus @default(DRAFT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AirTicket {
+  id        String        @id @default(cuid())
+  requestId String
+  request   TicketRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  ticketNumber String?
+  pnr          String?
+  airline      String?
+
+  passengerName String?
+  route         String?
+
+  issueDate     DateTime?
+  departureDate DateTime?
+
+  supplierCost Decimal? @db.Decimal(14, 2)
+  sellingPrice Decimal? @db.Decimal(14, 2)
+  tax          Decimal? @db.Decimal(14, 2)
+  markup       Decimal? @db.Decimal(14, 2)
+  profit       Decimal? @db.Decimal(14, 2)
+
+  status TicketRequestStatus @default(CONFIRMED)
+
+  refundAmount  Decimal? @db.Decimal(14, 2)
+  reissueAmount Decimal? @db.Decimal(14, 2)
+
+  ticketDocumentUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([pnr])
+  @@index([ticketNumber])
+}
+
+// ============================================================
+// VISA
+// ============================================================
+
+model VisaType {
+  id String @id @default(cuid())
+
+  countryId String
+  country   Country @relation(fields: [countryId], references: [id])
+
+  name        String
+  visaCode    String?
+  description String?
+
+  processingDays Int?
+  embassyFee     Decimal? @db.Decimal(14, 2)
+  serviceFee     Decimal? @db.Decimal(14, 2)
+  totalFee       Decimal? @db.Decimal(14, 2)
+  currency       String   @default("BDT")
+
+  isActive Boolean @default(true)
+
+  checklist    VisaChecklist[]
+  applications VisaApplication[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VisaChecklist {
+  id         String   @id @default(cuid())
+  visaTypeId String
+  visaType   VisaType @relation(fields: [visaTypeId], references: [id], onDelete: Cascade)
+
+  name        String
+  description String?
+  isRequired  Boolean @default(true)
+  sortOrder   Int     @default(0)
+
+  createdAt DateTime @default(now())
+}
+
+model VisaApplication {
+  id            String @id @default(cuid())
+  applicationNo String @unique
+
+  customerId String
+  customer   User   @relation(fields: [customerId], references: [id])
+
+  visaTypeId String
+  visaType   VisaType @relation(fields: [visaTypeId], references: [id])
+
+  status VisaStatus @default(DRAFT)
+
+  travelDate     DateTime?
+  submissionDate DateTime?
+  decisionDate   DateTime?
+
+  embassyName     String?
+  appointmentDate DateTime?
+
+  totalFee   Decimal @default(0) @db.Decimal(14, 2)
+  paidAmount Decimal @default(0) @db.Decimal(14, 2)
+  dueAmount  Decimal @default(0) @db.Decimal(14, 2)
+
+  notes String?
+
+  documents VisaDocument[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VisaDocument {
+  id            String          @id @default(cuid())
+  applicationId String
+  application   VisaApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  checklistId String?
+  name        String
+  url         String
+
+  status VisaDocumentStatus @default(PENDING)
+
+  rejectionReason String?
+
+  uploadedAt DateTime  @default(now())
+  verifiedAt DateTime?
+}
+
+// ============================================================
+// USER DOCUMENTS
+// ============================================================
+
+model UserDocument {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name String
+  type DocumentType
+  url  String
+
+  status DocumentStatus @default(PENDING)
+
+  issueDate  DateTime?
+  expiryDate DateTime?
+
+  verifiedBy String?
+  verifiedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// REVIEW
+// ============================================================
+
+model Review {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  tourId String?
+  tour   Tour?   @relation(fields: [tourId], references: [id])
+
+  rating  Int
+  title   String?
+  comment String?
+
+  status ReviewStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// CRM LEAD
+// ============================================================
+
+model Lead {
+  id String @id @default(cuid())
+
+  name  String
+  phone String?
+  email String?
+
+  source LeadSource
+  status LeadStatus @default(NEW)
+
+  destination String?
+  travelDate  DateTime?
+  budget      Decimal?  @db.Decimal(14, 2)
+  travelers   Int?
+
+  notes String?
+
+  customerId String?
+  customer   User?   @relation(fields: [customerId], references: [id])
+
+  assignedToId String?
+  assignedTo   User?   @relation("AssignedLead", fields: [assignedToId], references: [id])
+
+  followUps LeadFollowUp[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  branch    Branch?  @relation(fields: [branchId], references: [id])
+  branchId  String?
+
+  @@index([status])
+  @@index([source])
+}
+
+model LeadFollowUp {
+  id String @id @default(cuid())
+
+  leadId String
+  lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  followUpDate DateTime
+  note         String?
+
+  completed Boolean @default(false)
+
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// TASK MANAGEMENT
+// ============================================================
+
+model Task {
+  id String @id @default(cuid())
+
+  title       String
+  description String?
+
+  status   TaskStatus   @default(TODO)
+  priority TaskPriority @default(MEDIUM)
+
+  createdById String?
+  createdBy   User?   @relation("TaskCreator", fields: [createdById], references: [id])
+
+  assignedToId String?
+  assignedTo   User?   @relation("TaskAssignee", fields: [assignedToId], references: [id])
+
+  dueDate     DateTime?
+  completedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// SUPPORT
+// ============================================================
+
+model SupportTicket {
+  id       String @id @default(cuid())
+  ticketNo String @unique
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  subject     String
+  description String?
+
+  status   SupportTicketStatus @default(OPEN)
+  priority SupportPriority     @default(MEDIUM)
+
+  messages SupportMessage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SupportMessage {
+  id String @id @default(cuid())
+
+  ticketId String
+  ticket   SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  senderId      String?
+  message       String
+  attachmentUrl String?
+
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+
+model Notification {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title   String
+  message String
+
+  type   NotificationType
+  isRead Boolean          @default(false)
+
+  link String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, isRead])
+}
+
+// ============================================================
+// AI TRIP PLANNER
+// ============================================================
+
+model AITrip {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  destinationId String?
+  destination   Destination? @relation(fields: [destinationId], references: [id])
+
+  title           String?
+  origin          String?
+  destinationText String?
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  adults   Int @default(1)
+  children Int @default(0)
+  infants  Int @default(0)
+
+  budget   Decimal? @db.Decimal(14, 2)
+  currency String   @default("BDT")
+
+  travelStyle String?
+  interests   Json?
+  preferences Json?
+
+  status AITripStatus @default(DRAFT)
+
+  generatedTour Tour? @relation("AITripGeneratedTour")
+
+  itinerary AIItinerary[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AIItinerary {
+  id String @id @default(cuid())
+
+  aiTripId String
+  aiTrip   AITrip @relation(fields: [aiTripId], references: [id], onDelete: Cascade)
+
+  dayNumber   Int
+  title       String
+  description String?
+
+  morning   Json?
+  afternoon Json?
+  evening   Json?
+
+  meals         Json?
+  accommodation Json?
+  transport     Json?
+  activities    Json?
+
+  estimatedCost Decimal? @db.Decimal(14, 2)
+
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// BLOG
+// ============================================================
+
+model BlogCategory {
+  id String @id @default(cuid())
+
+  name        String
+  slug        String  @unique
+  description String?
+
+  posts BlogPost[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BlogPost {
+  id String @id @default(cuid())
+
+  categoryId String?
+  category   BlogCategory? @relation(fields: [categoryId], references: [id])
+
+  title   String
+  slug    String  @unique
+  excerpt String?
+  content String
+
+  coverImage String?
+
+  authorId String?
+  author   User?   @relation(fields: [authorId], references: [id])
+
+  status BlogStatus @default(DRAFT)
+
+  metaTitle       String?
+  metaDescription String?
+  keywords        String?
+
+  publishedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// CMS
+// ============================================================
+
+model CMSPage {
+  id String @id @default(cuid())
+
+  title String
+  slug  String @unique
+
+  content String
+
+  metaTitle       String?
+  metaDescription String?
+
+  isPublished Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Banner {
+  id String @id @default(cuid())
+
+  title       String?
+  subtitle    String?
+  description String?
+
+  image       String?
+  mobileImage String?
+
+  buttonText String?
+  buttonLink String?
+
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FAQ {
+  id String @id @default(cuid())
+
+  question String
+  answer   String
+
+  category  String?
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// CONTACT / ENQUIRY
+// ============================================================
+
+model ContactMessage {
+  id String @id @default(cuid())
+
+  name    String
+  email   String?
+  phone   String?
+  subject String?
+  message String
+
+  status ContactStatus @default(NEW)
+
+  repliedAt DateTime?
+
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// WEBSITE SETTINGS
+// ============================================================
+
+model WebsiteSetting {
+  id String @id @default(cuid())
+
+  key         String  @unique
+  value       Json
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SystemSetting {
+  id String @id @default(cuid())
+
+  key         String  @unique
+  value       Json
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// ACCOUNTING
+// ============================================================
+
+model LedgerAccount {
+  id String @id @default(cuid())
+
+  code String            @unique
+  name String
+  type LedgerAccountType
+
+  parentId String?
+  parent   LedgerAccount?  @relation("AccountHierarchy", fields: [parentId], references: [id])
+  children LedgerAccount[] @relation("AccountHierarchy")
+
+  openingBalance Decimal @default(0) @db.Decimal(14, 2)
+  currentBalance Decimal @default(0) @db.Decimal(14, 2)
+
+  status AccountStatus @default(ACTIVE)
+
+  journalLines JournalLine[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model JournalEntry {
+  id String @id @default(cuid())
+
+  journalNo String   @unique
+  entryDate DateTime @default(now())
+
+  description String?
+  reference   String?
+
+  status JournalStatus @default(DRAFT)
+
+  lines JournalLine[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model JournalLine {
+  id String @id @default(cuid())
+
+  journalEntryId String
+  journalEntry   JournalEntry @relation(fields: [journalEntryId], references: [id], onDelete: Cascade)
+
+  accountId String
+  account   LedgerAccount @relation(fields: [accountId], references: [id])
+
+  debit  Decimal @default(0) @db.Decimal(14, 2)
+  credit Decimal @default(0) @db.Decimal(14, 2)
+
+  description String?
+
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// AUDIT
+// ============================================================
+
+model AuditLog {
+  id String @id @default(cuid())
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  action   String
+  entity   String
+  entityId String?
+
+  oldData Json?
+  newData Json?
+
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([userId])
+}

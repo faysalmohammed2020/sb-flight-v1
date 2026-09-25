@@ -1,26 +1,870 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ========================================
+     SB FLIGHT BRAND COLORS
+     ======================================== */
+
+  --background: #f7fafc;
+  --foreground: #102a36;
+
+  --primary: #239cc0;
+  --primary-dark: #087ea3;
+  --primary-light: #e8f7fb;
+
+  --secondary: #f4a91a;
+  --secondary-dark: #d98d00;
+  --secondary-light: #fff6df;
+
+  --navy: #0b2533;
+  --navy-light: #163d4d;
+
+  --white: #ffffff;
+  --black: #000000;
+
+  /* ========================================
+     TEXT
+     ======================================== */
+
+  --text-primary: #102a36;
+  --text-secondary: #526a74;
+  --text-muted: #7c9199;
+  --text-white: #ffffff;
+
+  /* ========================================
+     SURFACE
+     ======================================== */
+
+  --surface: #ffffff;
+  --surface-soft: #f7fafc;
+  --surface-blue: #eef9fc;
+  --surface-gold: #fff9eb;
+
+  /* ========================================
+     BORDER
+     ======================================== */
+
+  --border: #dce8ed;
+  --border-light: #eaf1f4;
+  --border-primary: #b9e2ed;
+  --border-gold: #f7d98d;
+
+  /* ========================================
+     STATUS COLORS
+     ======================================== */
+
+  --success: #16a34a;
+  --success-light: #eaf8ef;
+
+  --warning: #f59e0b;
+  --warning-light: #fff7e6;
+
+  --danger: #dc2626;
+  --danger-light: #fef0f0;
+
+  --info: #2563eb;
+  --info-light: #eef4ff;
+
+  /* ========================================
+     SHADOW
+     ======================================== */
+
+  --shadow-sm: 0 2px 8px rgba(11, 37, 51, 0.06);
+  --shadow-md: 0 8px 25px rgba(11, 37, 51, 0.08);
+  --shadow-lg: 0 15px 40px rgba(11, 37, 51, 0.12);
+  --shadow-blue: 0 10px 30px rgba(35, 156, 192, 0.18);
+  --shadow-gold: 0 10px 30px rgba(244, 169, 26, 0.18);
+
+  /* ========================================
+     RADIUS
+     ======================================== */
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+
+  /* ========================================
+     TRANSITION
+     ======================================== */
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+/* ========================================
+   BASE
+   ======================================== */
+
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ========================================
+   TEXT UTILITIES
+   ======================================== */
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-navy {
+  color: var(--navy);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+
+/* ========================================
+   BRAND GRADIENTS
+   ======================================== */
+
+.bg-brand-gradient {
+  background: linear-gradient(
+    135deg,
+    #239cc0 0%,
+    #168db1 50%,
+    #087ea3 100%
+  );
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(
+    135deg,
+    #f4a91a 0%,
+    #ffbd3f 50%,
+    #d98d00 100%
+  );
+}
+
+.bg-brand-dark-gradient {
+  background: linear-gradient(
+    135deg,
+    #0b2533 0%,
+    #123c4d 50%,
+    #087ea3 100%
+  );
+}
+
+.text-brand-gradient {
+  background: linear-gradient(
+    90deg,
+    #239cc0,
+    #087ea3
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(
+    90deg,
+    #d98d00,
+    #f4a91a
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.site-header {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.site-header-dark {
+  background: var(--navy);
+  color: var(--white);
+}
+
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+
+.nav-link {
+  position: relative;
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-link.active {
+  color: var(--primary);
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--secondary);
+}
+
+
+/* ========================================
+   PRIMARY BUTTON
+   ======================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: var(--primary);
+  color: var(--white);
+
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+
+  padding: 11px 20px;
+
+  font-weight: 600;
+
+  transition:
+    background var(--transition-normal),
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-blue);
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   GOLD BUTTON
+   ======================================== */
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: var(--secondary);
+  color: var(--navy);
+
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius-md);
+
+  padding: 11px 20px;
+
+  font-weight: 700;
+
+  transition:
+    background var(--transition-normal),
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-dark);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   OUTLINE BUTTON
+   ======================================== */
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: transparent;
+  color: var(--primary);
+
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+
+  padding: 10px 20px;
+
+  font-weight: 600;
+
+  transition: all var(--transition-normal);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(244, 169, 26, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(35, 156, 192, 0.2),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #0b2533 0%,
+      #123c4d 50%,
+      #087ea3 100%
+    );
+
+  color: var(--white);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      rgba(255, 255, 255, 0.08) 1px,
+      transparent 1px
+    );
+
+  background-size: 30px 30px;
+
+  pointer-events: none;
+}
+
+
+/* ========================================
+   SECTION
+   ======================================== */
+
+.section {
+  padding: 80px 0;
+}
+
+.section-soft {
+  background: var(--surface-soft);
+}
+
+.section-blue {
+  background: var(--surface-blue);
+}
+
+.section-gold {
+  background: var(--surface-gold);
+}
+
+.section-title {
+  color: var(--navy);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  max-width: 650px;
+}
+
+
+/* ========================================
+   CARDS
+   ======================================== */
+
+.card {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-xl);
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.card-blue {
+  background: var(--surface-blue);
+  border-color: var(--border-primary);
+}
+
+.card-gold {
+  background: var(--surface-gold);
+  border-color: var(--border-gold);
+}
+
+
+/* ========================================
+   TOUR CARD
+   ======================================== */
+
+.tour-card {
+  overflow: hidden;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-xl);
+
+  box-shadow: var(--shadow-sm);
+
+  transition: all var(--transition-normal);
+}
+
+.tour-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tour-card .tour-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.tour-card .tour-image img {
+  transition: transform 500ms ease;
+}
+
+.tour-card:hover .tour-image img {
+  transform: scale(1.05);
+}
+
+
+/* ========================================
+   PRICE
+   ======================================== */
+
+.price {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.price-highlight {
+  color: var(--secondary-dark);
+  font-weight: 800;
+}
+
+
+/* ========================================
+   BADGES
+   ======================================== */
+
+.badge-primary {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  background: var(--primary-light);
+  color: var(--primary-dark);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  background: var(--secondary-light);
+  color: var(--secondary-dark);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+
+  background: var(--white);
+  color: var(--text-primary);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-md);
+
+  padding: 11px 14px;
+
+  outline: none;
+
+  transition:
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(35, 156, 192, 0.12);
+}
+
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.site-footer {
+  background: var(--navy);
+  color: #d9e8ed;
+}
+
+.site-footer h3,
+.site-footer h4 {
+  color: var(--white);
+}
+
+.site-footer a {
+  color: #b8ced6;
+  transition: color var(--transition-normal);
+}
+
+.site-footer a:hover {
+  color: var(--secondary);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #91aab4;
+}
+
+
+/* ========================================
+   SOCIAL ICON
+   ======================================== */
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: var(--white);
+
+  transition: all var(--transition-normal);
+}
+
+.social-icon:hover {
+  background: var(--secondary);
+  color: var(--navy);
+
+  transform: translateY(-2px);
+}
+
+
+/* ========================================
+   DASHBOARD
+   ======================================== */
+
+.dashboard-sidebar {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.dashboard-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 11px 14px;
+
+  border-radius: var(--radius-md);
+
+  color: #b8ced6;
+
+  transition: all var(--transition-normal);
+}
+
+.dashboard-sidebar-link:hover {
+  background: rgba(35, 156, 192, 0.15);
+  color: var(--white);
+}
+
+.dashboard-sidebar-link.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+
+/* ========================================
+   ADMIN
+   ======================================== */
+
+.admin-sidebar {
+  background: #071d29;
+  color: var(--white);
+}
+
+.admin-sidebar-link {
+  color: #a9c1ca;
+
+  transition: all var(--transition-normal);
+}
+
+.admin-sidebar-link:hover {
+  color: var(--white);
+  background: rgba(35, 156, 192, 0.12);
+}
+
+.admin-sidebar-link.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+
+/* ========================================
+   STAT CARDS
+   ======================================== */
+
+.stat-card {
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  padding: 20px;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--radius-md);
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.stat-card.gold .stat-card-icon {
+  background: var(--secondary-light);
+  color: var(--secondary-dark);
+}
+
+
+/* ========================================
+   TABLE
+   ======================================== */
+
+.table-container {
+  overflow: hidden;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.table-container th {
+  background: #f3f8fa;
+  color: var(--navy);
+
+  font-weight: 700;
+}
+
+.table-container td {
+  color: var(--text-secondary);
+}
+
+.table-container tr {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.table-container tr:hover {
+  background: #fafdfe;
+}
+
+
+/* ========================================
+   DIVIDER
+   ======================================== */
+
+.brand-divider {
+  width: 60px;
+  height: 4px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--secondary)
+  );
+}
+
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #edf3f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9fc6d2;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+
+/* ========================================
+   SELECTION
+   ======================================== */
+
+::selection {
+  background: rgba(35, 156, 192, 0.22);
+  color: var(--navy);
+}
+
+
+/* ========================================
+   FOCUS
+   ======================================== */
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 55px 0;
+  }
+
+  .hero-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }
