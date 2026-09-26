@@ -4,6 +4,7 @@ import {
   Activity,
   AirVent,
   BarChart3,
+  UserPlus,
   Bell,
   BookOpen,
   BriefcaseBusiness,
@@ -111,18 +112,18 @@ export const dashboardNavigation: DashboardNavItem[] = [
       {
         title: "Add Customer",
         href: "/dashboard/customers/new",
-        icon: Contact,
+        icon: UserPlus,
       },
-      {
-        title: "Customer Profiles",
-        href: "/dashboard/customers/profiles",
-        icon: UserCog,
-      },
-      {
-        title: "Customer Documents",
-        href: "/dashboard/customers/documents",
-        icon: FileText,
-      },
+      // {
+      //   title: "Customer Profiles",
+      //   href: "/dashboard/customers/profiles",
+      //   icon: UserCog,
+      // },
+      // {
+      //   title: "Customer Documents",
+      //   href: "/dashboard/customers/documents",
+      //   icon: FileText,
+      // },
       {
         title: "Customer Reviews",
         href: "/dashboard/customers/reviews",

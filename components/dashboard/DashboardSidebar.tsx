@@ -210,15 +210,30 @@ function SidebarItem({
   const hasChildren =
     !!item.children && item.children.length > 0;
 
-  const isChildActive = item.children?.some(
-    (child) =>
-      pathname === child.href ||
-      pathname.startsWith(`${child.href}/`)
-  );
+  const activeChild = item.children
+    ?.filter(
+      (child) =>
+        child.href &&
+        (pathname === child.href ||
+          pathname.startsWith(`${child.href}/`))
+    )
+    .reduce<(typeof item.children)[number] | undefined>(
+      (best, child) =>
+        !best || child.href!.length > best.href!.length
+          ? child
+          : best,
+      undefined
+    );
+  const activeChildHref = activeChild?.href;
+  const isChildActive = Boolean(activeChildHref);
 
-  const [open, setOpen] = useState(
-    Boolean(isChildActive)
-  );
+  const [openOverride, setOpenOverride] = useState<{
+    pathname: string;
+    open: boolean;
+  } | null>(null);
+  const open = openOverride?.pathname === pathname
+    ? openOverride.open
+    : isChildActive;
 
   const Icon = item.icon;
 
@@ -226,6 +241,7 @@ function SidebarItem({
     const active =
       pathname === item.href ||
       (!!item.href &&
+        item.href !== "/dashboard" &&
         pathname.startsWith(`${item.href}/`));
 
     return (
@@ -252,7 +268,7 @@ function SidebarItem({
     <div>
       <button
         type="button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => setOpenOverride({ pathname, open: !open })}
         className={`
           dashboard-sidebar-link
           w-full
@@ -289,8 +305,7 @@ function SidebarItem({
         >
           {item.children?.map((child) => {
             const active =
-              pathname === child.href ||
-              pathname.startsWith(`${child.href}/`);
+              child.href === activeChildHref;
 
             const ChildIcon = child.icon;
 
@@ -299,6 +314,7 @@ function SidebarItem({
                 key={child.href}
                 href={child.href!}
                 onClick={onNavigate}
+                aria-current={active ? "page" : undefined}
                 className={`
                   dashboard-sidebar-link
                   ${active ? "active" : ""}

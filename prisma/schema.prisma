@@ -524,6 +524,7 @@ model User {
   payments          Payment[]
   invoices          Invoice[]
   documents         UserDocument[]
+  uploadedImages    Image[]          @relation("ImageUploader")
   reviews           Review[]
   notifications     Notification[]
   supportTickets    SupportTicket[]
@@ -615,6 +616,30 @@ model CustomerProfile {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Image {
+  id           String   @id @default(cuid())
+  url          String   @unique
+  pathname     String   @unique
+  filename     String
+  originalName String?
+  mimeType     String?
+  size         Int?
+  folder       String
+  alt          String?
+  width        Int?
+  height       Int?
+  entityType   String?
+  entityId     String?
+  uploadedById String?
+  uploadedBy   User?    @relation("ImageUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([folder])
+  @@index([entityType, entityId])
+  @@index([uploadedById])
 }
 
 model Employee {

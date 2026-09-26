@@ -110,9 +110,7 @@ export default function DashboardHeader({
 
             <input
               type="search"
-              placeholder="
-                Search bookings, customers, tours...
-              "
+              placeholder="Search bookings, customers, tours..."
               className="
                 dashboard-header-search
                 h-10 w-full
